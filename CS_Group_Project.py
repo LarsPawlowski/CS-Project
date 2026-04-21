@@ -17,8 +17,7 @@ Welcome to AutoAppraise, the ultimate tool for car enthusiasts and buyers alike!
 """)
 
 
-# Text Input
+# Enter Car Details
 st.subheader("Discover Your Car's True Value")
-name = st.text_input("Enter your name", placeholder="Your name here...")
-if name != "":
-    st.write(f"Hello, {name}! Welcome to FCS!")
+st.subheader("Brand")
+brands = ["Mercedes Benz", "BMW", "Porsche", "Volvo", "Lamborghini", "Ferrari", "Audi", "Volkswagen", "Toyota", "Honda"]
