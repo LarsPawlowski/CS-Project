@@ -6,9 +6,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Tab Title
-st.set_page_config(page_title="FCS Streamlit Tutorial", page_icon=":computer:")
+st.set_page_config(page_title="AutoAppraise - Your Cars True Value", page_icon=":car:")
 # Title & Intro
-st.title("Hello, FCS!")
+st.title("Welcome to AutoAppraise!")
 st.write("""
 Welcome to the interactive Streamlit tutorial tailored for FCS bachelor students! 
 Here's a introductory showcase of what you can achieve using Streamlit with very little code.
