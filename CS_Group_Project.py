@@ -6,7 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Tab Title
-st.set_page_config(page_title="AutoAppraise - Your Cars True Value", page_icon=":car:")
+st.set_page_config(page_title="AutoAppraise - Your Cars True Value", page_icon="🏎️")
 # Title & Intro
 st.title("Welcome to AutoAppraise!")
 st.write("""
