@@ -19,6 +19,6 @@ Welcome to AutoAppraise, the ultimate tool for car enthusiasts and buyers alike!
 
 # Enter Car Details
 st.subheader("Discover Your Car's True Value")
-st.subheader("Brand")
+st.subheader("Car Charactaristics")
 brands = ["Mercedes Benz", "BMW", "Porsche", "Volvo", "Lamborghini", "Ferrari", "Audi", "Volkswagen", "Toyota", "Honda"]
-object_brand = st.selectbox(brands)
+object_brand = st.selectbox("Brand", brands)
