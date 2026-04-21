@@ -25,4 +25,3 @@ models = ["Model A", "Model B", "Model C", "Model D", "Model E", "Model F", "Mod
 object_model = st.selectbox("Model", models)
 object_year = st.number_input("Year", min_value=1990, max_value=2024, value=2020)
 object_mileage = st.number_input("Mileage (in km)", min_value=0, value=50000)
-conditions = ["Excellent", "Good", "Fair", "Poor"]
