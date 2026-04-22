@@ -17,11 +17,40 @@ Welcome to AutoAppraise, the ultimate tool for car enthusiasts and buyers alike!
 """)
 
 
-# Enter Car Details
+# Enter Car Details (Matches brand to available models)
 st.subheader("Discover Your Car's True Value")
 brands = ["Mercedes Benz", "BMW", "Porsche", "Volvo", "Lamborghini", "Ferrari", "Audi", "Volkswagen", "Toyota", "Honda"]
 object_brand = st.selectbox("Brand", brands)
-models = ["Model A", "Model B", "Model C", "Model D", "Model E", "Model F", "Model G", "Model H", "Model I", "Model J"]
+mercmodels = ["Mercedes A", "Mercedes B", "Mercedes C", "Mercedes D", "Mercedes E", "Mercedes F", "Mercedes G"]
+bmwmodels = ["BMW A", "BMW B", "BMW C", "BMW D", "BMW E", "BMW F", "BMW G"]
+porschemodels = ["Porsche A", "Porsche B", "Porsche C", "Porsche D", "Porsche E", "Porsche F", "Porsche G"]
+volvomodels = ["Volvo A", "Volvo B", "Volvo C", "Volvo D", "Volvo E", "Volvo F", "Volvo G"]
+lamborghinimodels = ["Lamborghini A", "Lamborghini B", "Lamborghini C", "Lamborghini D", "Lamborghini E", "Lamborghini F", "Lamborghini G"]
+ferrarimodels = ["Ferrari A", "Ferrari B", "Ferrari C", "Ferrari D", "Ferrari E", "Ferrari F", "Ferrari G"]
+audimodels = ["Audi A", "Audi B", "Audi C", "Audi D", "Audi E", "Audi F", "Audi G"]
+volkswagenmodels = ["Volkswagen A", "Volkswagen B", "Volkswagen C", "Volkswagen D", "Volkswagen E", "Volkswagen F", "Volkswagen G"]
+toyotamodels = ["Toyota A", "Toyota B", "Toyota C", "Toyota D", "Toyota E", "Toyota F", "Toyota G"]
+hondamodels = ["Honda A", "Honda B", "Honda C", "Honda D", "Honda E", "Honda F", "Honda G"]
+if object_brand == "Mercedes Benz":
+    models = mercmodels
+elif object_brand == "BMW":
+    models = bmwmodels
+elif object_brand == "Porsche":
+    models = porschemodels
+elif object_brand == "Volvo":
+    models = volvomodels
+elif object_brand == "Lamborghini":
+    models = lamborghinimodels
+elif object_brand == "Ferrari":
+    models = ferrarimodels
+elif object_brand == "Audi":
+    models = audimodels
+elif object_brand == "Volkswagen":
+    models = volkswagenmodels
+elif object_brand == "Toyota":
+    models = toyotamodels
+elif object_brand == "Honda":
+    models = hondamodels
 object_model = st.selectbox("Model", models)
 object_year = st.number_input("Year", min_value=1990, max_value=2026, value=2023)
 object_mileage = st.number_input("Mileage (in km)", min_value=0, value=50000)
