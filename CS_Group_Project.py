@@ -23,7 +23,7 @@ brands = ["Mercedes Benz", "BMW", "Porsche", "Volvo", "Lamborghini", "Ferrari", 
 object_brand = st.selectbox("Brand", brands)
 models = ["Model A", "Model B", "Model C", "Model D", "Model E", "Model F", "Model G", "Model H", "Model I", "Model J"]
 object_model = st.selectbox("Model", models)
-object_year = st.number_input("Year", min_value=1990, max_value=2026, value=1990)
+object_year = st.number_input("Year", min_value=1990, max_value=2026, value=2023)
 object_mileage = st.number_input("Mileage (in km)", min_value=0, value=50000)
 
 # KAIS INPUT
