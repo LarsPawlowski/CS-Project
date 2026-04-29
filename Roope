@@ -1,0 +1,67 @@
+import streamlit as st
+
+# --- VALUATION LOGIC ---
+def calculate_appraisal(car):
+    base_price = 20000
+    
+    # Depreciate by age (Calculated for 2026)
+    age = 2026 - int(car["year"])
+    age_factor = max(0.3, 1 - (age * 0.10))
+
+    # Depreciate by mileage
+    mileage = int(car["mileage"])
+    mileage_factor = max(0.5, 1 - (mileage / 200000))
+
+    # Condition multiplier
+    condition_multipliers = {
+        "Excellent": 1.10, 
+        "Good": 1.00, 
+        "Fair": 0.85, 
+        "Poor": 0.65
+    }
+    condition_factor = condition_multipliers.get(car["condition"], 1.0)
+
+    estimate = int(base_price * age_factor * mileage_factor * condition_factor)
+    
+    return {
+        "estimate": estimate,
+        "low": int(estimate * 0.90),
+        "high": int(estimate * 1.10),
+    }
+
+# --- STREAMLIT UI ---
+st.title("AutoAppraise — Your Car's True Value")
+
+st.subheader("Enter Car Details")
+object_year = st.number_input("Year", min_value=1990, max_value=2026, value=2020)
+object_mileage = st.number_input("Mileage (in km)", min_value=0, value=50000)
+object_condition = st.selectbox("Condition", ["Excellent", "Good", "Fair", "Poor"])
+
+if st.button("Calculate Value"):
+    car_data = {
+        "year": object_year,       
+        "mileage": object_mileage, 
+        "condition": object_condition
+    }
+    
+    result = calculate_appraisal(car_data)
+    
+    st.divider()
+    
+    # Improved Results Display
+    with st.container(border=True):
+        st.subheader("Valuation Results")
+        col1, col2, col3 = st.columns(3)
+        col1.metric("Trade-in", f"${result['low']:,}")
+        col2.metric("Market Estimate", f"${result['estimate']:,}")
+        col3.metric("Dealer Retail", f"${result['high']:,}")
+
+    # Timeline Visualization
+    max_scale = 200000
+    progress_percentage = min(result['estimate'] / max_scale, 1.0)
+    
+    st.write(f"### Value Timeline ($0 — ${max_scale:,})")
+    st.progress(progress_percentage)
+    st.caption(f"Your car is positioned at *{int(progress_percentage * 100)}%* of our maximum valuation scale.")
+
+    st.success(f"Based on your inputs, the estimated value is *${result['estimate']:,}*.")
