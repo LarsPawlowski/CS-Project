@@ -18,11 +18,21 @@ script_dir = os.path.dirname(__file__)
 file_path = os.path.join(script_dir, "carvana.csv")
 
 df = pd.read_csv(file_path)
-brands = sorted(df["Brand"].unique())
-types = sorted(df["Type"].unique())
-
+brands = sorted(df["Brand"].dropna().astype(str).unique())
+#brand selectbox
 object_brand = st.selectbox("Brand", brands)
-object_type = st.selectbox("Type", types)
+
+# Clean columns once
+df["Brand"] = df["Brand"].astype(str).str.strip()
+df["Type"] = df["Type"].astype(str).str.strip()
+
+# Match car types to brand
+filtered_df = df[df["Brand"] == object_brand]
+
+types = sorted(filtered_df["Type"].dropna().unique())
+#type selectbox
+object_type = st.selectbox("Type", types, key="type_select")
+#remaining inputs
 object_year = st.number_input("Year", min_value=1990, max_value=2026, value=2023)
 object_miles = st.number_input("Miles", min_value=0, value=50000)
 object_price = st.number_input("Price Sold", min_value=0, value=20000)
@@ -33,6 +43,23 @@ if st.button("Submit"):
     if object_image is None:
         st.error("Please upload documentation before submitting.")
     else:
+        # -----------------------------
+        # ADD THIS BLOCK
+        # -----------------------------
+        new_data = {
+            "Brand": object_brand.strip(),
+            "Type": object_type.strip(),
+            "Year": object_year,
+            "Miles": object_miles,
+            "Price": object_price
+        }
+
+        new_df = pd.DataFrame([new_data])
+
+        # Append to CSV (without overwriting)
+        new_df.to_csv(file_path, mode="a", header=False, index=False)
+        # -----------------------------
+
         st.success("Thank you for your submission! Your data will be reviewed and added to our dataset.")
 
 col1, col2, col3 = st.columns(3)
