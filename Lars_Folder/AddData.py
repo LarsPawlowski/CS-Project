@@ -30,16 +30,13 @@ object_type = st.selectbox("Type", types, key="type_select")
 object_year = st.number_input("Year", min_value=1990, max_value=2026, value=2023)
 object_miles = st.number_input("Miles", min_value=0, value=50000)
 object_price = st.number_input("Price Sold", min_value=0, value=20000)
-#Image Upload section for veriifcation of the data, Coded by VSCODE AI
+#Image Upload section for veriifcation of the data, from https://docs.streamlit.io/develop/api-reference/widgets/st.file_uploader)
 object_image = st.file_uploader("Upload Documentation for Verification of Sale", type=["jpg", "png"])
 #Data Submission
 if st.button("Submit"):
     if object_image is None:
         st.error("Please upload documentation before submitting.")
     else:
-        # -----------------------------
-        # ADD THIS BLOCK
-        # -----------------------------
         new_data = {
             "Brand": object_brand.strip(),
             "Type": object_type.strip(),
