@@ -51,7 +51,7 @@ if st.button("Submit"):
         new_df = pd.DataFrame([new_data])
 
         # Append to CSV (without overwriting)
-        new_df.to_csv(file_path, mode="a", header=False, index=False)
+        new_df.to_csv("carvana.csv", mode="a", header=False, index=False)
         # -----------------------------
 
         st.success("Thank you for your submission! Your data will be reviewed and added to our dataset.")
