@@ -1,12 +1,9 @@
-#CODE TO ADD DATA TO DATASETS
+# Page for Adding Data To the Datasets (if you sold a car you can add it here)
 import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import os
 
-
-# Page for Adding Data To the Datasets (if you sold a car you can add it here)
 # Tab Title
 st.set_page_config(page_title="AutoAppraise - Sold Cars", page_icon="🏎️")
 # Title & Intro
@@ -14,10 +11,7 @@ st.title("AutoAppraise")
 st.subheader("Inform us about sold cars to help us improve our appraise model!")
 
 # Load brands and types from carvana.csv
-script_dir = os.path.dirname(__file__)
-file_path = os.path.join(script_dir, "carvana.csv")
-
-df = pd.read_csv(file_path)
+df = pd.read_csv("carvana.csv")
 brands = sorted(df["Brand"].dropna().astype(str).unique())
 #brand selectbox
 object_brand = st.selectbox("Brand", brands)
