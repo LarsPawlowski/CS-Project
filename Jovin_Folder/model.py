@@ -15,7 +15,7 @@ df = df[cols]
 # Bereinigen
 df = df[df['Price($)'] > 500]
 df = df[df['Price($)'] < 300000]
-df = df[df['Mileage(km)'] > 500]
+df = df[df['Mileage(km)'] >= 0]
 df = df.dropna(subset=['Price($)', 'Mileage(km)', 'Brand', 'Model'])
 
 print(f"Einträge nach Bereinigung: {df.shape[0]}")
