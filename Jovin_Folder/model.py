@@ -21,10 +21,7 @@ df = df.dropna(subset=['Price($)', 'Mileage(km)', 'Brand', 'Model'])
 print(f"Einträge nach Bereinigung: {df.shape[0]}")
 
 # Kategorische Spalten in Zahlen umwandeln
-df_encoded = pd.get_dummies(df, columns=['Brand', 'Model', 'Condition', 
-                                          'FuelType', 'Transmission', 
-                                          'DriveType', 'BodyType', 
-                                          'AccidentHistory'])
+df_encoded = pd.get_dummies(df, columns=['Brand', 'Model', 'Condition', 'FuelType', 'Transmission', 'DriveType', 'BodyType', 'AccidentHistory'])
 
 # Features und Zielwert trennen
 X = df_encoded.drop('Price($)', axis=1)

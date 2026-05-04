@@ -4,6 +4,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
 # Tab Title
 st.set_page_config(page_title="AutoAppraise - Your Cars True Value", page_icon="🏎️")
@@ -55,4 +56,5 @@ object_model = st.selectbox("Model", models)
 object_year = st.number_input("Year", min_value=1990, max_value=2026, value=2023)
 object_mileage = st.number_input("Mileage (in km)", min_value=0, value=50000)
 
-# KAIS INPUT
+# KAIS INPUT - Machine Learning Model loading
+model_path = os.path.join(os.path.dirname(__file__), '..', 'Jovin_Folder', 'model.pkl')
