@@ -14,7 +14,7 @@ st.write("---")
 @st.cache_resource # This tells Streamlit to only load the heavy model once
 def load_model():
     # Adjust this path if your pkl file is in a different folder relative to this script
-    model_path = os.path.join(os.path.dirname(__file__), 'Jovin_Folder', 'model.pkl')
+    model_path = os.path.join(os.path.dirname(__file__), 'ML', 'model.pkl')
     try:
         with open(model_path, 'rb') as f:
             model, trained_columns = pickle.load(f)
@@ -22,7 +22,7 @@ def load_model():
     except FileNotFoundError:
         # Fallback if the path above fails
         try:
-             with open('Jovin_Folder/model.pkl', 'rb') as f:
+             with open('ML/model.pkl', 'rb') as f:
                 model, trained_columns = pickle.load(f)
              return model, trained_columns
         except FileNotFoundError:
