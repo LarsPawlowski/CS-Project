@@ -6,18 +6,16 @@ import pickle
 
 # Daten laden
 print("Lade Daten...")
-df = pd.read_csv("car_price_dataset.csv")
+df = pd.read_csv("Jovin_Folder/car_price_dataset.csv")
 
 # Relevante Spalten behalten
-cols = ['Price($)', 'Brand', 'Model', 'Year', 'CarAge', 'Condition', 
-        'Mileage(km)', 'EngineSize(L)', 'FuelType', 'Horsepower', 
-        'Torque', 'Transmission', 'DriveType', 'BodyType', 'AccidentHistory']
+cols = ['Price($)', 'Brand', 'Model', 'Year', 'CarAge', 'Condition', 'Mileage(km)', 'EngineSize(L)', 'FuelType', 'Horsepower', 'Torque', 'Transmission', 'DriveType', 'BodyType', 'AccidentHistory'] #Keeping important columns in df
 df = df[cols]
 
 # Bereinigen
 df = df[df['Price($)'] > 500]
 df = df[df['Price($)'] < 300000]
-df = df[df['Mileage(km)'] >= 0]
+df = df[df['Mileage(km)'] > 500]
 df = df.dropna(subset=['Price($)', 'Mileage(km)', 'Brand', 'Model'])
 
 print(f"Einträge nach Bereinigung: {df.shape[0]}")
@@ -46,7 +44,7 @@ mae = mean_absolute_error(y_test, predictions)
 print(f"Durchschnittlicher Fehler: ${mae:.0f}")
 
 # Modell speichern
-with open('model.pkl', 'wb') as f:
+with open('Jovin_Folder/model.pkl', 'wb') as f:
     pickle.dump((model, X.columns.tolist()), f)
 
 print("Modell gespeichert!")
