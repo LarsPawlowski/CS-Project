@@ -6,53 +6,81 @@ import matplotlib.pyplot as plt
 
 # Tab Title
 st.set_page_config(page_title="AutoAppraise - Sold Cars", page_icon="🏎️")
+
 # Title & Intro
 st.title("AutoAppraise")
 st.subheader("Inform us about sold cars to help us improve our appraise model!")
 
-# Load brands and types from carvana.csv
-df = pd.read_csv("carvana.csv")
+# Load dataset
+df = pd.read_csv("car_price_dataset.csv")
+
+# Brand select
 brands = sorted(df["Brand"].dropna().astype(str).unique())
-#brand selectbox
 object_brand = st.selectbox("Brand", brands)
 
-# Clean columns once
+# Clean columns
 df["Brand"] = df["Brand"].astype(str).str.strip()
-df["Type"] = df["Type"].astype(str).str.strip()
+df["Model"] = df["Model"].astype(str).str.strip()
 
-# Match car types to brand
+# Match models to brand
 filtered_df = df[df["Brand"] == object_brand]
+models = sorted(filtered_df["Model"].dropna().unique())
 
-types = sorted(filtered_df["Type"].dropna().unique())
-#type selectbox
-object_type = st.selectbox("Type", types, key="type_select")
-#remaining inputs
+# Model selectbox
+object_model = st.selectbox("Model", models, key="model_select")
+
+# Remaining inputs
 object_year = st.number_input("Year", min_value=1990, max_value=2026, value=2023)
-object_miles = st.number_input("Miles", min_value=0, value=50000)
-object_price = st.number_input("Price Sold", min_value=0, value=20000)
-#Image Upload section for veriifcation of the data, from https://docs.streamlit.io/develop/api-reference/widgets/st.file_uploader)
-object_image = st.file_uploader("Upload Documentation for Verification of Sale", type=["jpg", "png"])
-#Data Submission
+object_mileage = st.number_input("Mileage (km)", min_value=0, value=50000)
+object_price = st.number_input("Price ($)", min_value=0, value=20000)
+
+# Image upload
+object_image = st.file_uploader(
+    "Upload Documentation for Verification of Sale", 
+    type=["jpg", "png"]
+)
+
+# Data Submission
 if st.button("Submit"):
     if object_image is None:
         st.error("Please upload documentation before submitting.")
     else:
         new_data = {
             "Brand": object_brand.strip(),
-            "Type": object_type.strip(),
+            "Model": object_model.strip(),
             "Year": object_year,
-            "Miles": object_miles,
-            "Price": object_price
+            "CarAge": 2026 - object_year,  # simple calculation
+            "Condition": "Used",
+            "Mileage(km)": object_mileage,
+            "EngineSize(L)": None,
+            "FuelType": None,
+            "Horsepower": None,
+            "Torque": None,
+            "Transmission": None,
+            "DriveType": None,
+            "BodyType": None,
+            "Doors": None,
+            "Seats": None,
+            "Color": None,
+            "Interior": None,
+            "Options": None,
+            "City": None,
+            "AccidentHistory": None,
+            "Insurance": None,
+            "RegistrationStatus": None,
+            "FuelEfficiency(L/100km)": None,
+            "PricePerKm": object_price / object_mileage if object_mileage > 0 else 0,
+            "Price($)": object_price
         }
 
         new_df = pd.DataFrame([new_data])
 
-        # Append to CSV (without overwriting)
-        new_df.to_csv("carvana.csv", mode="a", header=False, index=False)
-        # -----------------------------
+        # Append to CSV
+        new_df.to_csv("car_price_dataset.csv", mode="a", header=False, index=False)
 
-        st.success("Thank you for your submission! Your data will be reviewed and added to our dataset.")
+        st.success("Thank you! Your data has been added to the dataset.")
 
+# Navigation
 col1, col2, col3 = st.columns(3)
 with col2:
     if st.button("Back to Homepage"):
