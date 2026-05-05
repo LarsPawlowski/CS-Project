@@ -6,40 +6,32 @@ import matplotlib.pyplot as plt
 
 # Tab Title
 st.set_page_config(page_title="AutoAppraise - Sold Cars", page_icon="🏎️")
-
 # Title & Intro
 st.title("AutoAppraise")
 st.subheader("Inform us about sold cars to help us improve our appraise model!")
 
-# Load dataset
+# Load brands and types from the dataset
 df = pd.read_csv("car_price_dataset.csv")
-
-# Brand select
+#Brand selectbox
 brands = sorted(df["Brand"].dropna().astype(str).unique())
 object_brand = st.selectbox("Brand", brands)
-
 # Clean columns
 df["Brand"] = df["Brand"].astype(str).str.strip()
 df["Model"] = df["Model"].astype(str).str.strip()
-
-# Match models to brand
+# Match car types to brands
 filtered_df = df[df["Brand"] == object_brand]
 models = sorted(filtered_df["Model"].dropna().unique())
-
 # Model selectbox
 object_model = st.selectbox("Model", models, key="model_select")
-
 # Remaining inputs
 object_year = st.number_input("Year", min_value=1990, max_value=2026, value=2023)
 object_mileage = st.number_input("Mileage (km)", min_value=0, value=50000)
 object_price = st.number_input("Price ($)", min_value=0, value=20000)
-
 # Image upload
 object_image = st.file_uploader(
     "Upload Documentation for Verification of Sale", 
     type=["jpg", "png"]
 )
-
 # Data Submission
 if st.button("Submit"):
     if object_image is None:
@@ -75,12 +67,10 @@ if st.button("Submit"):
 
         new_df = pd.DataFrame([new_data])
 
-        # Append to CSV
         new_df.to_csv("car_price_dataset.csv", mode="a", header=False, index=False)
 
         st.success("Thank you! Your data has been added to the dataset.")
-
-# Navigation
+# Back to Homepage Button
 col1, col2, col3 = st.columns(3)
 with col2:
     if st.button("Back to Homepage"):
