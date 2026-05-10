@@ -4,15 +4,15 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error
 import pickle
 
-# Daten laden
+# Loading the data from the dataset from the correct folder
 print("Lade Daten...")
 df = pd.read_csv("Jovin_Folder/car_price_dataset.csv")
 
-# Relevante Spalten behalten
-cols = ['Price($)', 'Brand', 'Model', 'Year', 'CarAge', 'Condition', 'Mileage(km)', 'EngineSize(L)', 'FuelType', 'Horsepower', 'Torque', 'Transmission', 'DriveType', 'BodyType', 'AccidentHistory'] #Keeping important columns in df
+# Filtering the dataset to only keep the relevant columns
+cols = ['Price($)', 'Brand', 'Model', 'Year', 'CarAge', 'Condition', 'Mileage(km)', 'EngineSize(L)', 'FuelType', 'Horsepower', 'Torque', 'Transmission', 'DriveType', 'BodyType', 'AccidentHistory'] 
 df = df[cols]
 
-# Bereinigen
+# filtering und removing entries that don't make sense
 df = df[df['Price($)'] > 500]
 df = df[df['Price($)'] < 300000]
 df = df[df['Mileage(km)'] >= 0]
@@ -20,27 +20,27 @@ df = df.dropna(subset=['Price($)', 'Mileage(km)', 'Brand', 'Model'])
 
 print(f"Einträge nach Bereinigung: {df.shape[0]}")
 
-# Kategorische Spalten in Zahlen umwandeln
+# Encoding categorical columns into dummy variables for the model
 df_encoded = pd.get_dummies(df, columns=['Brand', 'Model', 'Condition', 'FuelType', 'Transmission', 'DriveType', 'BodyType', 'AccidentHistory'])
 
-# Features und Zielwert trennen
+# Separating the price as target, everything else are the features
 X = df_encoded.drop('Price($)', axis=1)
 y = df_encoded['Price($)']
 
-# Train/Test Split
+# Train/Test Split: 80% for training, 20% for testing
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# Modell trainieren
+# Training the model
 print("Trainiere Modell...")
 model = RandomForestRegressor(n_estimators=100, random_state=42, n_jobs=-1)
 model.fit(X_train, y_train)
 
-# Genauigkeit prüfen
+# Checking how well the model performs on the test data
 predictions = model.predict(X_test)
 mae = mean_absolute_error(y_test, predictions)
 print(f"Durchschnittlicher Fehler: ${mae:.0f}")
 
-# Modell speichern
+# Saving the model as a file so we can load it in the app
 with open('Jovin_Folder/model.pkl', 'wb') as f:
     pickle.dump((model, X.columns.tolist()), f)
 
