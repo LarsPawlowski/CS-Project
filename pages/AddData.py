@@ -13,7 +13,7 @@ st.title("AutoAppraise")
 st.subheader("Inform us about sold cars to help us improve our appraise model!")
 
 # Load dataset
-df = pd.read_csv("car_price_dataset.csv")
+df = pd.read_csv("ML/car_price_dataset.csv")
 
 # Brand selectbox
 brands = sorted(df["Brand"].dropna().astype(str).unique())
