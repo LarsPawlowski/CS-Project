@@ -6,7 +6,7 @@ import pickle
 
 # Loading the data from the dataset from the correct folder
 print("Lade Daten...")
-df = pd.read_csv("Jovin_Folder/car_price_dataset.csv")
+df = pd.read_csv("ML/car_price_dataset.csv")
 
 # Filtering the dataset to only keep the relevant columns
 cols = ['Price($)', 'Brand', 'Model', 'Year', 'CarAge', 'Condition', 'Mileage(km)', 'EngineSize(L)', 'FuelType', 'Horsepower', 'Torque', 'Transmission', 'DriveType', 'BodyType', 'AccidentHistory'] 
@@ -41,7 +41,7 @@ mae = mean_absolute_error(y_test, predictions)
 print(f"Durchschnittlicher Fehler: ${mae:.0f}")
 
 # Saving the model as a file so we can load it in the app
-with open('Jovin_Folder/model.pkl', 'wb') as f:
+with open('ML/model.pkl', 'wb') as f:
     pickle.dump((model, X.columns.tolist()), f)
 
 print("Modell gespeichert!")
