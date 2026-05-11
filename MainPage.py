@@ -48,7 +48,7 @@ st.write("---")
 # A primary button which when called sends to valuation page tab.
 if st.button("Get your valuation 🚀", type="primary"):
     # This tells Streamlit to navigate to the other file!
-    st.switch_page("/Appraisal.py") 
+    st.switch_page("pages/Appraisal.py") 
 
 st.divider() # Creates a clean horizontal line
 
