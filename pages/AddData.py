@@ -149,7 +149,7 @@ if st.button("Submit"):
             "Price($)": object_price
         }
         new_df = pd.DataFrame([new_data])
-        new_df.to_csv("car_price_dataset.csv", mode="a", header=False, index=False)
+        new_df.to_csv("ML/car_price_dataset.csv", mode="a", header=False, index=False)
         st.success("Thank you! Your data has been added to the dataset.")
 # Back to Homepage Button
 col1, col2, col3 = st.columns(3)
