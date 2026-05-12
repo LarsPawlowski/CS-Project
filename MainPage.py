@@ -45,10 +45,17 @@ st.markdown("""
 """)
 st.write("---")
 
-# A primary button which when called sends to valuation page tab.
-if st.button("Get your valuation 🚀", type="primary"):
-    # This tells Streamlit to navigate to the other file!
-    st.switch_page("pages/AddData.py") 
+col1, col2 = st.columns(2)
+
+# 2. Place the first button in the first column
+with col1:
+    if st.button("Get your valuation 🚀", type="primary", use_container_width=True):
+        st.switch_page("pages/Appraisal.py") 
+
+# 3. Place the second button in the second column
+with col2:
+    if st.button("Add your car data 🚀", type="primary", use_container_width=True):
+        st.switch_page("pages/AddData.py")
 
 st.divider() # Creates a clean horizontal line
 
