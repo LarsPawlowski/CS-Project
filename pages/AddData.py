@@ -42,7 +42,6 @@ object_condition = st.selectbox("Condition", conditions)
 # Engine Size Slider
 engine_min = float(df["EngineSize(L)"].dropna().min())
 engine_max = float(df["EngineSize(L)"].dropna().max())
-
 object_engine = st.slider(
     "Engine Size (L)",
     min_value=engine_min,
@@ -58,7 +57,6 @@ object_fuel = st.selectbox("Fuel Type", fuel_types)
 # Horsepower Slider
 horsepower_min = int(df["Horsepower"].dropna().min())
 horsepower_max = int(df["Horsepower"].dropna().max())
-
 object_horsepower = st.slider(
     "Horsepower",
     min_value=horsepower_min,
@@ -69,7 +67,6 @@ object_horsepower = st.slider(
 # Torque Slider
 torque_min = int(df["Torque"].dropna().min())
 torque_max = int(df["Torque"].dropna().max())
-
 object_torque = st.slider(
     "Torque",
     min_value=torque_min,
@@ -91,6 +88,7 @@ object_seats = st.slider(
     max_value=seats_max,
     value=seats_min
 )
+
 # Color
 colors = ["None"] + sorted(df["Color"].dropna().astype(str).unique().tolist())
 object_color = st.selectbox("Color", colors)
@@ -116,11 +114,13 @@ object_fuel_efficiency = st.slider(
     value=fuel_min,
     step=0.1
 )
+
 # Image verification upload (non functional)
 object_image = st.file_uploader(
     "Upload Documentation for Verification of Sale",
     type=["jpg", "png"]
 )
+
 # Data Submission
 if st.button("Submit"):
     if object_image is None:
