@@ -332,8 +332,11 @@ if st.button("Calculate Value 📊", type="primary", use_container_width=True):
         paper_bgcolor='rgba(0,0,0,0)',
     )
     
-    fig.update_xaxis(showgrid=True, gridwidth=1, gridcolor='rgba(128,128,128,0.2)')
-    fig.update_yaxis(showgrid=True, gridwidth=1, gridcolor='rgba(128,128,128,0.2)')
+    # Change update_xaxis to update_xaxes
+    fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor='rgba(128,128,128,0.2)')
+
+    # Change update_yaxis to update_yaxes
+    fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='rgba(128,128,128,0.2)')
     
     st.plotly_chart(fig, use_container_width=True)
     
@@ -378,3 +381,8 @@ if st.button("Calculate Value 📊", type="primary", use_container_width=True):
     
     st.info(f"**Final Estimate: {CURRENCY}{int(predicted_price):,}**")
     st.caption("📌 **Disclaimer:** This is an AI-generated estimate based on historical data and machine learning models. Actual market prices may vary based on location, market conditions, vehicle specifics, and current demand.")
+
+if st.button("Back to Homepage"):
+    st.write("Redirecting to homepage...")
+    st.switch_page("MainPage.py")
+        
