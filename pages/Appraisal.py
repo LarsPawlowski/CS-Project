@@ -4,14 +4,14 @@ import pickle
 import os
 from datetime import datetime
  
-# --- PAGE CONFIGURATION ---
+# Page config. 
 st.set_page_config(page_title="AutoAppraise - Valuation", page_icon="🏎️", layout="wide")
  
-# --- CONSTANTS ---
+# constant factors for the website 
 CURRENCY = "$"  # Change to "CHF", "£", "€", etc. for non-US markets
 CURRENT_YEAR = datetime.now().year
  
-# --- LOAD ML MODEL ---
+# Loading the ML model 
 @st.cache_resource
 def load_model():
     """Load the pre-trained machine learning model"""
@@ -35,7 +35,7 @@ if model is None:
     st.error("⚠️ Could not locate the Machine Learning model (`model.pkl`). Please ensure it is in the correct folder.")
     st.stop()
  
-# --- CAR DATABASE ---
+# Car database which will be used to obtain the results 
 car_database = {
     'Audi': ['A4', 'A6', 'A8', 'Q7'],
     'BMW': ['3 Series', '5 Series', '7 Series', 'X5'],
@@ -98,14 +98,14 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
  
-# --- PROFESSIONAL HEADER ---
+# Appraisal page header 
 st.markdown("""
     <div class="main-header">
         <div class="main-title">🏎️ AutoAppraise</div>
         <div class="main-subtitle">Discover Your Car's True Value</div>
         <div class="main-description">
             Welcome to AutoAppraise, your intelligent automotive valuation partner powered by advanced machine learning. 
-            Our sophisticated AI model analyzes multiple data points including vehicle specifications, market trends, 
+            Our sophisticated ML model analyzes multiple data points including vehicle specifications, market trends, 
             and historical pricing data to provide you with an accurate, real-time market appraisal. Whether you're 
             looking to sell, trade-in, or simply curious about your vehicle's worth, our platform delivers instant, 
             data-driven insights that help you make informed decisions with confidence.
@@ -119,7 +119,7 @@ st.markdown("""
     </div>
  """, unsafe_allow_html=True)
  
-# --- DISCLAIMER ---
+# Disclaimer for users 
 st.info("""
     **ℹ️ Beta Version Notice**  
     This valuation tool is currently in development. Our AI model supports a **limited selection of popular car brands and models**. 
@@ -142,7 +142,7 @@ with st.expander("📋 View Supported Brands & Models"):
  
 st.divider()
  
-# --- INPUT FORM ---
+# input form 
 st.subheader("📋 Vehicle Information")
  
 col1, col2 = st.columns(2)
@@ -175,7 +175,7 @@ object_body = st.selectbox("Body Type", ["Sedan", "SUV", "Hatchback", "Coupe", "
  
 st.divider()
  
-# --- PREDICTION BUTTON ---
+# predictor button for car value 
 if st.button("Calculate Value 📊", type="primary", use_container_width=True):
     
     with st.spinner("🔍 Analyzing market data and computing valuation..."):
@@ -212,7 +212,7 @@ if st.button("Calculate Value 📊", type="primary", use_container_width=True):
         trade_in_value = int(predicted_price * 0.90)
         retail_value = int(predicted_price * 1.10)
         
-    # --- RESULTS DISPLAY ---
+    # result display 
     st.balloons()
     
     st.write("")  # Spacing
