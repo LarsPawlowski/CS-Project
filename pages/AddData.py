@@ -148,8 +148,15 @@ if st.button("Submit"):
             "FuelEfficiency(L/100km)": object_fuel_efficiency,
             "Price($)": object_price
         }
+
+        #Read the existing database
+        existing_df = pd.read_csv("ML/car_price_dataset.csv")
         new_df = pd.DataFrame([new_data])
-        new_df.to_csv("ML/car_price_dataset.csv", mode="a", header=False, index=False)
+        # Combines everything without making a mess
+        updated_df = pd.concat([existing_df, new_df], ignore_index=True)
+        # Save on CSV file
+        updated_df.to_csv("ML/car_price_dataset.csv", index=False)
+
         st.success("Thank you! Your data has been added to the dataset.")
 # Back to Homepage Button
 col1, col2, col3 = st.columns(3)

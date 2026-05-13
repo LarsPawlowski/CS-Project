@@ -76,7 +76,7 @@ except FileNotFoundError:
     live_car_count = "Loading..." 
 
 with col1:
-    st.metric(label="Prediction Accuracy", value="~95%")#estimate
+    st.metric(label="Prediction Accuracy", value="~98%")#estimate
 with col2:
     # Notice we removed "5k+ cars" and put our dynamic variable here!
     st.metric(label="Cross-reference Data", value=live_car_count) #from definition above
