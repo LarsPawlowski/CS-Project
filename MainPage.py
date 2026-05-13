@@ -1,19 +1,17 @@
 import streamlit as st
 import pandas as pd
 
-# 1. Page Configuration --> for the name of the tab
+# Title of the tab of the website
 st.set_page_config(
     page_title="AutoAppraise - Your Car's True Value", 
     page_icon="🏎️",
     layout="centered" # "centered" looks better for landing pages than "wide"
 )
 
-# --- Quick Welcome Toast ---
-# --- Little popup which can be closed ---
+# Little popup which can be closed on the right
 st.toast('Welcome to AutoAppraise', icon='🏎️')
 
-# --- Sidebar Menu ---
-# A sidebar in the website adds a multi-page dashboard --> allows to play between different codes
+# A sidebar on the left side of the page, allowing you to switch easily between the different website tabs. 
 with st.sidebar:
     st.title("🏎️ AutoAppraise")
     st.markdown("Your car valuation expert.")
@@ -22,13 +20,13 @@ with st.sidebar:
     st.markdown("📚 FCS-BWL FS26")
     st.markdown("🐐 Team 10.10")
 
-# --- Image Banner ---
-# Using a high-quality stock photo from Unsplash. 
-# Can be replaced by  downloaded, but downloaded photo has to be on the folder of autopraise
+# Using a stock photo from Unsplash. 
+# Can be replaced by downloaded picture, but downloaded photo must be in the right folder.
+# This is just a link which also works. On the top of the page as now we are going with the formatting, starting from the top down.
 st.image("https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1000&auto=format&fit=crop", use_container_width=True)
 
-# 2. Hero Section
-# basically the title section ==> maybe can add a slogan or something
+# The title section ==> maybe can add a slogan or something
+# using ** for italics
 st.title("🏎️ AutoAppraise")
 st.subheader("Discover your car's *true* market value.")
 st.markdown("""
@@ -36,7 +34,8 @@ Welcome to AutoAppraise! Enter your car's details and get an instant, data-drive
 Our tool is powered by real market data to give you a fair valuation.
 """)
 
-# The Business Case (Requirement 1) --> we need a problem and solution section
+# Here just describing the case at hand, describing the problem and the solution
+# using ** ** for bold
 st.write("---")
 st.subheader("💡 The Business Case")
 st.markdown("""
@@ -46,28 +45,27 @@ st.markdown("""
 """)
 st.write("---")
 
+
+# Making virtual columns, in which the buttons, which will direct to the seperate sections of the websites will be located.
+# Making two columns, spaces two buttons equally. 
+
 col1, col2 = st.columns(2)
 
-# 2. Place the first button in the first column
 with col1:
-    if st.button("Get your valuation 🚀", type="primary", use_container_width=True):
-        st.switch_page("pages/Appraisal.py") 
+    if st.button("Get your valuation 🚀", type="primary", use_container_width=True): #primary button just makes it red background button, you can also use secondary etc...
+        st.switch_page("pages/Appraisal.py") # changes to the other sections of the website, by changing to seperate code. This means that the code has to be found in the pages folder inside the CS main folder. 
 
-# 3. Place the second button in the second column
 with col2:
-    if st.button("Add your car data 🚀", type="primary", use_container_width=True):
+    if st.button("Add your car data 📊", type="primary", use_container_width=True):
         st.switch_page("pages/AddData.py")
 
 st.divider() # Creates a clean horizontal line
 
-# 3. Stats Section (Using native Streamlit metrics)
-
-# 3. Stats Section (Using native Streamlit metrics)
+# Stats Section (Using Streamlit metrics)
 st.subheader("Our Numbers")
-col1, col2, col3 = st.columns(3)
+col1, col2, col3 = st.columns(3) # Here we made 3 coulumns instead
 
-# --- THE LIVE COUNTER LOGIC ---
-# Read the CSV and count the rows
+# Live counting logic, so that the code here reads the input added onto the car_price_dataset.csv, and counts that code, and the number will then be added onto the main page. --> live ticker 
 try:
     df = pd.read_csv("ML/car_price_dataset.csv")
     total_cars = len(df)
@@ -78,22 +76,22 @@ except FileNotFoundError:
     live_car_count = "Loading..." 
 
 with col1:
-    st.metric(label="Prediction Accuracy", value="~95%")
+    st.metric(label="Prediction Accuracy", value="~95%")#estimate
 with col2:
     # Notice we removed "5k+ cars" and put our dynamic variable here!
-    st.metric(label="Cross-reference Data", value=live_car_count)
+    st.metric(label="Cross-reference Data", value=live_car_count) #from definition above
 with col3:
-    st.metric(label="Valuation Time", value="< 2s")
+    st.metric(label="Valuation Time", value="< 2s") #estimate
 
 
 st.divider()
 
-# 4. "How it Works" Section (Using columns and info boxes to explain the simulation)
+# Working with columns again to explain the process of estimating a car price
 st.subheader("How the process works")
 step1, step2, step3 = st.columns(3)
 
 with step1:
-    st.info("**01. Enter Details** \n\n Brand, model, year, mileage, and condition.")
+    st.info("**01. Enter Details** \n\n Brand, model, year, mileage, condition, and more.") #working with infoboxes, to get th color in the back
 
 with step2:
     st.info("**02. Cross-Reference** \n\n Live market listings and historical sales data.")
@@ -103,27 +101,26 @@ with step3:
 
 st.divider()
 
-# Video Section (which can be incorporated) ---
-# Embedding video directly into website. --> place into the folder required.
+# Idea of incorporating the video into the website itself, as the video should be not only like a teaser, but also another form of explanation
+# The video has to be in the folder as well in your pages folder. And the file must be saved as an MP4. 
 st.subheader("Project Pitch")
 st.markdown("Watch our 4-minute presentation on how AutoAppraise works:")
-# you can do: st.video("my_presentation.mp4")
 st.video("trial.MP4")
 
-# 5. Features Section
-# same way how 3,4 is)
+# Features Section similar to sections above with columns.
+
 st.subheader("What's under the hood")
 feat1, feat2 = st.columns(2)
 
 with feat1:
-    st.markdown("📊 **Data Visualisation:** \nPrice trends and depreciation curves.")
+    st.markdown("📊 **Data Visualisation:** \nPrice trends and depreciation curves.") #basically just more information, with new line.
     st.markdown("🔌 **Live API Data:** \nConnected to real car listing databases.")
 
 with feat2:
     st.markdown("🤖 **Machine Learning:** \nTrained on thousands of real sales.")
     st.markdown("💾 **Database Storage:** \nSave and revisit past valuations.")
 
-# --- Expanders for extra professional polish ---
+#Expanders meaning once pressed more information will follow. 
 st.subheader("More Information")
 
 with st.expander("❓ Frequently Asked Questions"):
@@ -143,5 +140,5 @@ with st.expander("👥 About the Team & Project"):
 
 st.write("") # Adds a little blank space
 
-# 6.  Footer
+#Footer section using caption function
 st.caption("AutoAppraise · Built for the FCS-BWL Group Project · University of St. Gallen FS26")
