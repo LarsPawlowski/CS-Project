@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 
 # 1. Page Configuration --> for the name of the tab
 st.set_page_config(
@@ -19,7 +20,7 @@ with st.sidebar:
     st.divider()
     st.markdown("📍 **University of St. Gallen**")
     st.markdown("📚 FCS-BWL FS26")
-    st.markdown("🐐 Team 1.10")
+    st.markdown("🐐 Team 10.10")
 
 # --- Image Banner ---
 # Using a high-quality stock photo from Unsplash. 
@@ -39,9 +40,9 @@ Our tool is powered by real market data to give you a fair valuation.
 st.write("---")
 st.subheader("💡 The Business Case")
 st.markdown("""
-**The Problem:** Automotive market suffers from lack of...
+**The Problem:** The used car market suffers from heavy information asymmetry. Purchasers, lacking access to crucial information, such as accident history, are constantly vulnerable to high subjective pricing. This makes it incredibly difficult to determine a car's true value without specialized industry knowledge. 
 
-**Our Solution:** What we do is...
+**Our Solution:** AutoAppraise eliminates the guesswork from car buying. By cross-referencing your vehicle's specific details with thousands of historical sales data, our website computes an objective, data-driven price. This way we provide and empower you to make informed financial decisions backed by real market analytics.
 """)
 st.write("---")
 
@@ -60,15 +61,30 @@ with col2:
 st.divider() # Creates a clean horizontal line
 
 # 3. Stats Section (Using native Streamlit metrics)
+
+# 3. Stats Section (Using native Streamlit metrics)
 st.subheader("Our Numbers")
 col1, col2, col3 = st.columns(3)
 
+# --- THE LIVE COUNTER LOGIC ---
+# Read the CSV and count the rows
+try:
+    df = pd.read_csv("ML/car_price_dataset.csv")
+    total_cars = len(df)
+    # This automatically adds a comma to big numbers (e.g., 50,001 cars)
+    live_car_count = f"{total_cars:,} cars" 
+except FileNotFoundError:
+    # Just in case the file gets moved, it won't crash the app
+    live_car_count = "Loading..." 
+
 with col1:
-    st.metric(label="Prediction Accuracy", value="~94%")
+    st.metric(label="Prediction Accuracy", value="~95%")
 with col2:
-    st.metric(label="Cross-reference Data", value="5k+ cars")
+    # Notice we removed "5k+ cars" and put our dynamic variable here!
+    st.metric(label="Cross-reference Data", value=live_car_count)
 with col3:
-    st.metric(label="Valuation Time", value="< 5s")
+    st.metric(label="Valuation Time", value="< 2s")
+
 
 st.divider()
 
