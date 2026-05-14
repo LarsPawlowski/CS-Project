@@ -129,10 +129,10 @@ with st.expander("👥 About the Team & Project"):
     st.write("Built for the Group Project at the University of St. Gallen.")
     st.write("---")
     st.write("**Contribution Matrix:**")
-    st.write("- **Daniel:** Frontend Design & App Structure")
-    st.write("- **Lars:** Linking Brand to Model to Year")
-    st.write("- **Jovin:** Determining Reasonable Limitation Criteria Based on Datasets")
-    st.write("- **Kai:** Machine Learning and Car Datasets")
+    st.write("- **Daniel:** Frontend Design, App Structure and Linking of Pages")
+    st.write("- **Lars:** Linking Brand to Model to Year, Page to Add Dataset")
+    st.write("- **Jovin:** Machine Learning and Car Datasets")
+    st.write("- **Kai:** Machine Learning, Car Datasets and AutoAppraise Video")
     st.write("- **Roope:** Results page, Design & Structure")
 
 
