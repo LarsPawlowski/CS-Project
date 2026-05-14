@@ -105,7 +105,7 @@ st.divider()
 # The video has to be in the folder as well in your pages folder. And the file must be saved as an MP4. 
 st.subheader("Project Pitch")
 st.markdown("Watch our 4-minute presentation on how AutoAppraise works:")
-st.video("trial.MP4")
+st.video("video.mp4")
 
 # Features Section similar to sections above with columns.
 
@@ -114,17 +114,15 @@ feat1, feat2 = st.columns(2)
 
 with feat1:
     st.markdown("📊 **Data Visualisation:** \nPrice trends and depreciation curves.") #basically just more information, with new line.
-    st.markdown("🔌 **Live API Data:** \nConnected to real car listing databases.")
 
 with feat2:
     st.markdown("🤖 **Machine Learning:** \nTrained on thousands of real sales.")
-    st.markdown("💾 **Database Storage:** \nSave and revisit past valuations.")
 
 #Expanders meaning once pressed more information will follow. 
 st.subheader("More Information")
 
 with st.expander("❓ Frequently Asked Questions"):
-    st.write("**Where do you get your data?**\nWe cross-reference live market listings and historical sales.")
+    st.write("**Where do you get your data?**\nWe used a free Dataset to train our model: https://www.kaggle.com/datasets/mahdimashayekhi/used-car-price")
     st.write("**Is this free?**\nYes! AutoAppraise is a free tool, everyone is welcome.")
 
 with st.expander("👥 About the Team & Project"):
