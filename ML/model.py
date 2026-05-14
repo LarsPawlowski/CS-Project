@@ -13,9 +13,9 @@ cols = ['Price($)', 'Brand', 'Model', 'Year', 'CarAge', 'Condition', 'Mileage(km
 df = df[cols]
 
 # filtering und removing entries that don't make sense
-df = df[df['Price($)'] > 500]
-df = df[df['Price($)'] < 300000]
-df = df[df['Mileage(km)'] >= 0]
+df = df[df['Price($)'] > 500] # filter entries with a price below 500
+df = df[df['Price($)'] < 300000] # filter entries with a price above 300k
+df = df[df['Mileage(km)'] >= 0] # filter entries with negative mileage
 df = df.dropna(subset=['Price($)', 'Mileage(km)', 'Brand', 'Model'])
 
 print(f"Einträge nach Bereinigung: {df.shape[0]}")
@@ -27,7 +27,7 @@ df_encoded = pd.get_dummies(df, columns=['Brand', 'Model', 'Condition', 'FuelTyp
 X = df_encoded.drop('Price($)', axis=1)
 y = df_encoded['Price($)']
 
-# Train/Test Split: 80% for training, 20% for testing
+# Train/Test Split: 80% for training, 20% for testing, 80/20 split allows a more precise modell while still having enought for testing with total of 50'000 datapoints
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Training the model
@@ -44,7 +44,7 @@ print(f"Durchschnittlicher Fehler: ${mae:.0f}")
 print(f"R²-Score: {r2:.4f}") 
 print(f"Erklärte Varianz: {r2*100:.1f}%")
 
-# Saving the model as a file so we can load it in the app
+# Saving the model as a pickle file so we can load it in the app
 with open('ML/model.pkl', 'wb') as f:
     pickle.dump((model, X.columns.tolist()), f)
 
